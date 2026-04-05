@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberSuraksha | Is Your Digital Life Safe?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="matrixCanvas"></canvas>
+
+  <nav class="navbar">
+    <div class="logo">Cyber<span class="accent">Suraksha</span></div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#quiz">Quiz</a></li>
+      <li><a href="#help">Active Help</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#stories">Stories</a></li>
+      <li><a href="#report" class="btn-report">Report Fraud</a></li>
+    </ul>
+    <div class="menu-toggle" id="mobile-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+  </nav>
+
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <div class="ticker__item">🚨 ₹1.25 lakh crore lost to cybercrime in India in 2023.</div>
+      <div class="ticker__item">⚠️ Phishing attacks increased by 45% this year.</div>
+      <div class="ticker__item">🔐 Never share your OTP with anyone, not even bank officials.</div>
+      <div class="ticker__item">🛑 Verify UPI IDs before making any payments.</div>
+    </div>
+  </div>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1 class="glitch" data-text="Is Your Digital Life Safe?">Is Your Digital Life Safe?</h1>
+      <h2 class="subheadline">Jaano. Seekho. Bachao. <br> <span class="dim">Know. Learn. Protect.</span></h2>
+      <div class="shield-container">
+        <div class="shield-icon glow">🛡️</div>
+      </div>
+      <div class="cta-group">
+        <a href="#quiz" class="btn btn-primary">Take the Quiz →</a>
+        <a href="#videos" class="btn btn-secondary">Explore Threats →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="quiz" class="section">
+    <div class="container">
+      <h2 class="section-title">Cyber IQ Test</h2>
+      <div class="quiz-container">
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="quiz-progress"></div>
+        </div>
+        <div id="quiz-content">
+          <div class="question-header">
+            <h3>Question <span id="q-num">1</span> of 10</h3>
+          </div>
+          <h4 id="question-text" class="question-text">Loading question...</h4>
+          <div id="options-container" class="options-grid"></div>
+          <div id="feedback" class="feedback hidden"></div>
+        </div>
+        <div id="quiz-result" class="hidden"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="help" class="section alt-bg">
+    <div class="container">
+      <h2 class="section-title">Active Response Center</h2>
+      <p class="section-subtitle">What should I do if...?</p>
+      
+      <div class="chatbot-ui">
+        <div class="scenarios">
+          <button class="scenario-btn" data-scenario="kyc">I received a fake KYC call</button>
+          <button class="scenario-btn" data-scenario="insta">Someone hacked my Instagram</button>
+          <button class="scenario-btn" data-scenario="upi">I got a suspicious UPI payment request</button>
+          <button class="scenario-btn" data-scenario="otp">My OTP was shared accidentally</button>
+          <button class="scenario-btn" data-scenario="link">I clicked a phishing link</button>
+        </div>
+        <div class="chat-window">
+          <div class="chat-header">Cyber Assistant Online</div>
+          <div class="chat-messages" id="chat-messages">
+            <div class="msg ai-msg"><span class="avatar">🤖</span> <div class="msg-content">Hello! Select a scenario from the left to get immediate step-by-step guidance.</div></div>
+          </div>
+          <div class="typing-indicator hidden" id="typing-indicator">
+             <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="videos" class="section">
+    <div class="container">
+      <h2 class="section-title">Watch & Learn</h2>
+      
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="financial">Financial Fraud</button>
+        <button class="filter-btn" data-filter="social">Social Media</button>
+        <button class="filter-btn" data-filter="identity">Identity Theft</button>
+        <button class="filter-btn" data-filter="phishing">Phishing</button>
+        <button class="filter-btn" data-filter="ransomware">Ransomware</button>
+      </div>
+
+      <div class="video-grid" id="video-grid"></div>
+    </div>
+  </section>
+
+  <section id="stories" class="section alt-bg">
+    <div class="container">
+      <h2 class="section-title">India Cyber Stories</h2>
+      <p class="section-subtitle">Real Incidents, Real People</p>
+      <div class="stories-layout">
+        <div class="stories-feed" id="stories-feed"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tips-carousel-section">
+    <div class="tips-track" id="tips-track"></div>
+  </section>
+
+  <footer id="report" class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col branding">
+          <h3>Cyber<span class="accent">Suraksha</span></h3>
+          <p>Empowering digital citizens with knowledge to protect their online identities.</p>
+        </div>
+        <div class="footer-col red-alert">
+          <h3>🚨 Emergency?</h3>
+          <p>National Cyber Crime Reporting Portal</p>
+          <a href="tel:1930" class="btn-call">📞 Call 1930</a>
+          <br>
+          <a href="https://cybercrime.gov.in" target="_blank" class="report-link">Visit cybercrime.gov.in →</a>
+        </div>
+        <div class="footer-col resources">
+          <h3>Helpful Links</h3>
+          <ul>
+            <li><a href="https://www.cert-in.org.in/" target="_blank">CERT-In</a></li>
+            <li><a href="#">Cyber Safety Checklist (PDF) EN</a></li>
+            <li><a href="#">Cyber Safety Checklist (PDF) HI</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Made with ❤️ for Digital India | Hack The Scammers, Protect Yourself.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
