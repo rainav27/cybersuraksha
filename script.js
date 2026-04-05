@@ -1,49 +1,31 @@
-// Improved script.js for CyberSuraksha
+// Comprehensive refactored JavaScript code
 
-// Accessibility features
-function makeAccessible(element) {
-    element.setAttribute('tabindex', '0'); // Make elements focusable
-    element.setAttribute('role', 'button'); // Specify role for assistive technologies
-}
-
-// Keyboard navigation
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Tab') {
-        // Custom navigation logic can go here
-    }
-});
-
-// Lazy loading feature for images
-function lazyLoadImages() {
+// Lazy loading images and assets
+function lazyLoad() {
     const images = document.querySelectorAll('img[data-src]');
-    const config = {
-        rootMargin: '0px 0px 200px 0px',
-        threshold: 0.01
+    const options = {
+        root: null,
+        threshold: 0.1,
+        rootMargin: '0px'
     };
-    let observer;
 
-    if ('IntersectionObserver' in window) {
-        observer = new IntersectionObserver(function(entries, self) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.onload = () => img.removeAttribute('data-src');
-                    self.unobserve(img);
-                }
-            });
-        }, config);
+    const loadImage = (image) => {
+        image.src = image.dataset.src;
+        image.onload = () => {
+            image.classList.add('loaded');
+        };
+    };
 
-        images.forEach(image => {
-            observer.observe(image);
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                loadImage(entry.target);
+                observer.unobserve(entry.target);
+            }
         });
-    } else {
-        // Fallback for browsers that don't support IntersectionObserver
-        images.forEach(image => {
-            image.src = image.dataset.src;
-            image.onload = () => image.removeAttribute('data-src');
-        });
-    }
+    }, options);
+
+    images.forEach(image => observer.observe(image));
 }
 
 // Dynamic ticker loading
@@ -51,25 +33,63 @@ function loadTickerData() {
     fetch('https://api.example.com/ticker')
         .then(response => response.json())
         .then(data => {
-            // Process and display ticker data
-            displayTicker(data);
+            const ticker = document.getElementById('dynamic-ticker');
+            ticker.innerHTML = data.map(item => `<span>${item}</span>`).join('');
         })
         .catch(error => {
             console.error('Error loading ticker data:', error);
+            // Provide user feedback for the error
+            const ticker = document.getElementById('dynamic-ticker');
+            ticker.innerHTML = '<span>Error loading data</span>';
         });
 }
 
-function displayTicker(data) {
-    // Code to display the ticker data
+// Keyboard navigation for accessibility
+function setupKeyboardNavigation() {
+    const focusableElementsString = 'a[href], area[href], input:not([disabled]), select, textarea, button:not([disabled]), [tabindex]';
+    const focusableElements = document.querySelectorAll(focusableElementsString);
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    document.addEventListener('keydown', (event) => {
+        const isTabPressed = (event.key === 'Tab');
+
+        if (!isTabPressed) return;
+
+        if (event.shiftKey) { // shift + tab
+            if (document.activeElement === firstElement) {
+                event.preventDefault();
+                lastElement.focus();
+            }
+        } else { // tab
+            if (document.activeElement === lastElement) {
+                event.preventDefault();
+                firstElement.focus();
+            }
+        }
+    });
 }
 
 // Error handling
-window.onerror = function(message, source, lineno, colno, error) {
-    console.error('Error occurred:', message, 'at', source + ':' + lineno + ':' + colno);
+function handleError(message) {
+    console.error(message);
+    alert('An error occurred: ' + message);
+}
+
+// Performance optimizations
+const getDataOptimized = async () => {
+    try {
+        const response = await fetch('https://api.example.com/data');
+        if (!response.ok) throw new Error('Network response was not ok');
+        return await response.json();
+    } catch (error) {
+        handleError(error.message);
+    }
 };
 
-// Initialize features
-document.addEventListener('DOMContentLoaded', function() {
-    lazyLoadImages();
+// Initialize all functionalities
+document.addEventListener('DOMContentLoaded', () => {
+    lazyLoad();
     loadTickerData();
+    setupKeyboardNavigation();
 });
