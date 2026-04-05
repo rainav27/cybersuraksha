@@ -1,164 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Character Encoding and Viewport -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO and Meta Information -->
   <title>CyberSuraksha | Is Your Digital Life Safe?</title>
+  <meta name="description" content="CyberSuraksha empowers digital citizens with knowledge to protect their online identities. Take our Cyber IQ test, learn about digital threats, and get instant help with cyber emergencies.">
+  <meta name="keywords" content="cybersecurity, digital safety, phishing prevention, cyber fraud, India cybercrime">
+  <meta name="author" content="CyberSuraksha Team">
+  <meta name="theme-color" content="#1a1a2e">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="favicon.ico">
+  
+  <!-- Open Graph Meta Tags for Social Sharing -->
+  <meta property="og:title" content="CyberSuraksha | Is Your Digital Life Safe?">
+  <meta property="og:description" content="Learn cybersecurity tips and protect yourself from digital threats.">
+  <meta property="og:type" content="website">
+  
+  <!-- Preconnect to External Fonts for Performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous">
+  
+  <!-- Main Stylesheet -->
   <link rel="stylesheet" href="style.css">
+  
+  <!-- Skip to Main Content Link for Accessibility -->
+  <style>
+    .skip-to-main {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: white;
+      padding: 8px;
+      text-decoration: none;
+      z-index: 100;
+    }
+    .skip-to-main:focus {
+      top: 0;
+    }
+  </style>
 </head>
 <body>
-  <canvas id="matrixCanvas"></canvas>
+  <!-- Skip to Main Content Link -->
+  <a href="#main-content" class="skip-to-main">Skip to main content</a>
+  
+  <!-- Matrix Background Canvas -->
+  <canvas id="matrixCanvas" aria-hidden="true"></canvas>
 
-  <nav class="navbar">
-    <div class="logo">Cyber<span class="accent">Suraksha</span></div>
-    <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#quiz">Quiz</a></li>
-      <li><a href="#help">Active Help</a></li>
-      <li><a href="#videos">Videos</a></li>
-      <li><a href="#stories">Stories</a></li>
-      <li><a href="#report" class="btn-report">Report Fraud</a></li>
-    </ul>
-    <div class="menu-toggle" id="mobile-menu">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
+  <!-- Navigation Bar with Semantic HTML and Accessibility -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="logo-container">
+      <header>
+        <h1 id="site-logo" class="logo">
+          Cyber<span class="accent">Suraksha</span>
+          <span class="tagline">Empowering Digital Citizens</span>
+        </h1>
+      </header>
     </div>
+    
+    <!-- Navigation Links -->
+    <ul class="nav-links" role="menubar">
+      <li role="none"><a href="#home" role="menuitem">Home</a></li>
+      <li role="none"><a href="#quiz" role="menuitem">Quiz</a></li>
+      <li role="none"><a href="#help" role="menuitem">Active Help</a></li>
+      <li role="none"><a href="#videos" role="menuitem">Videos</a></li>
+      <li role="none"><a href="#stories" role="menuitem">Stories</a></li>
+      <li role="none"><a href="#report" class="btn-report" role="menuitem">Report Fraud</a></li>
+    </ul>
+    
+    <!-- Mobile Menu Toggle with ARIA -->
+    <button class="menu-toggle" id="mobile-menu" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="nav-links">
+      <span class="bar" aria-hidden="true"></span>
+      <span class="bar" aria-hidden="true"></span>
+      <span class="bar" aria-hidden="true"></span>
+    </button>
   </nav>
 
-  <div class="ticker-wrap">
-    <div class="ticker">
-      <div class="ticker__item">🚨 ₹1.25 lakh crore lost to cybercrime in India in 2023.</div>
-      <div class="ticker__item">⚠️ Phishing attacks increased by 45% this year.</div>
-      <div class="ticker__item">🔐 Never share your OTP with anyone, not even bank officials.</div>
-      <div class="ticker__item">🛑 Verify UPI IDs before making any payments.</div>
+  <!-- News Ticker Section with Dynamic Data -->
+  <div class="ticker-wrap" role="region" aria-label="Cyber security alerts" aria-live="polite">
+    <div class="ticker" id="ticker" data-ticker-items='[
+      {"emoji": "🚨", "text": "₹1.25 lakh crore lost to cybercrime in India in 2023."},
+      {"emoji": "⚠️", "text": "Phishing attacks increased by 45% this year."},
+      {"emoji": "🔐", "text": "Never share your OTP with anyone, not even bank officials."},
+      {"emoji": "🛑", "text": "Verify UPI IDs before making any payments."
+    ]'>
+      <!-- Ticker items will be generated dynamically by JavaScript -->
     </div>
   </div>
 
-  <section id="home" class="hero">
-    <div class="hero-content">
-      <h1 class="glitch" data-text="Is Your Digital Life Safe?">Is Your Digital Life Safe?</h1>
-      <h2 class="subheadline">Jaano. Seekho. Bachao. <br> <span class="dim">Know. Learn. Protect.</span></h2>
-      <div class="shield-container">
-        <div class="shield-icon glow">🛡️</div>
-      </div>
-      <div class="cta-group">
-        <a href="#quiz" class="btn btn-primary">Take the Quiz →</a>
-        <a href="#videos" class="btn btn-secondary">Explore Threats →</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="quiz" class="section">
-    <div class="container">
-      <h2 class="section-title">Cyber IQ Test</h2>
-      <div class="quiz-container">
-        <div class="progress-bar-container">
-          <div class="progress-bar" id="quiz-progress"></div>
+  <!-- Main Content Area -->
+  <main id="main-content">
+    
+    <!-- Hero Section -->
+    <section id="home" class="hero" role="region" aria-label="Hero section">
+      <div class="hero-content">
+        <h1 class="glitch" data-text="Is Your Digital Life Safe?" tabindex="0">Is Your Digital Life Safe?</h1>
+        <h2 class="subheadline">Jaano. Seekho. Bachao. <br> <span class="dim">Know. Learn. Protect.</span></h2>
+        <div class="shield-container">
+          <div class="shield-icon glow" role="img" aria-label="Security shield icon">🛡️</div>
         </div>
-        <div id="quiz-content">
-          <div class="question-header">
-            <h3>Question <span id="q-num">1</span> of 10</h3>
+        <div class="cta-group">
+          <a href="#quiz" class="btn btn-primary" aria-label="Take the Cyber IQ Quiz">Take the Quiz →</a>
+          <a href="#videos" class="btn btn-secondary" aria-label="Explore cyber threats and solutions">Explore Threats →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="section" role="region" aria-label="Cyber IQ Test quiz">
+      <div class="container">
+        <h2 class="section-title">Cyber IQ Test</h2>
+        <div class="quiz-container">
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="quiz-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Quiz progress"></div>
           </div>
-          <h4 id="question-text" class="question-text">Loading question...</h4>
-          <div id="options-container" class="options-grid"></div>
-          <div id="feedback" class="feedback hidden"></div>
-        </div>
-        <div id="quiz-result" class="hidden"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="help" class="section alt-bg">
-    <div class="container">
-      <h2 class="section-title">Active Response Center</h2>
-      <p class="section-subtitle">What should I do if...?</p>
-      
-      <div class="chatbot-ui">
-        <div class="scenarios">
-          <button class="scenario-btn" data-scenario="kyc">I received a fake KYC call</button>
-          <button class="scenario-btn" data-scenario="insta">Someone hacked my Instagram</button>
-          <button class="scenario-btn" data-scenario="upi">I got a suspicious UPI payment request</button>
-          <button class="scenario-btn" data-scenario="otp">My OTP was shared accidentally</button>
-          <button class="scenario-btn" data-scenario="link">I clicked a phishing link</button>
-        </div>
-        <div class="chat-window">
-          <div class="chat-header">Cyber Assistant Online</div>
-          <div class="chat-messages" id="chat-messages">
-            <div class="msg ai-msg"><span class="avatar">🤖</span> <div class="msg-content">Hello! Select a scenario from the left to get immediate step-by-step guidance.</div></div>
+          <div id="quiz-content">
+            <div class="question-header">
+              <h3>Question <span id="q-num" aria-live="polite">1</span> of 10</h3>
+            </div>
+            <h4 id="question-text" class="question-text" role="heading" aria-level="4">Loading question...</h4>
+            <div id="options-container" class="options-grid" role="group" aria-label="Quiz answer options"></div>
+            <div id="feedback" class="feedback hidden" role="alert" aria-live="assertive"></div>
           </div>
-          <div class="typing-indicator hidden" id="typing-indicator">
-             <span></span><span></span><span></span>
+          <div id="quiz-result" class="hidden" role="region" aria-label="Quiz results"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Active Response Center (Chatbot Section) -->
+    <section id="help" class="section alt-bg" role="region" aria-label="Cyber response assistance">
+      <div class="container">
+        <h2 class="section-title">Active Response Center</h2>
+        <p class="section-subtitle">What should I do if...?</p>
+        
+        <div class="chatbot-ui">
+          <!-- Scenario Buttons with Semantic Grouping -->
+          <div class="scenarios" role="group" aria-label="Cyber emergency scenarios">
+            <button class="scenario-btn" data-scenario="kyc" aria-label="Get help if you received a fake KYC call">I received a fake KYC call</button>
+            <button class="scenario-btn" data-scenario="insta" aria-label="Get help if someone hacked your Instagram">Someone hacked my Instagram</button>
+            <button class="scenario-btn" data-scenario="upi" aria-label="Get help for suspicious UPI payment request">I got a suspicious UPI payment request</button>
+            <button class="scenario-btn" data-scenario="otp" aria-label="Get help if your OTP was shared accidentally">My OTP was shared accidentally</button>
+            <button class="scenario-btn" data-scenario="link" aria-label="Get help if you clicked a phishing link">I clicked a phishing link</button>
+          </div>
+          
+          <!-- Chat Window -->
+          <div class="chat-window">
+            <div class="chat-header">Cyber Assistant Online</div>
+            <div class="chat-messages" id="chat-messages" role="log" aria-label="Chat conversation">
+              <div class="msg ai-msg" role="article">
+                <span class="avatar" aria-label="AI assistant icon">🤖</span>
+                <div class="msg-content">Hello! Select a scenario from the left to get immediate step-by-step guidance.</div>
+              </div>
+            </div>
+            <div class="typing-indicator hidden" id="typing-indicator" aria-hidden="true" aria-label="AI is typing">
+              <span></span><span></span><span></span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="videos" class="section">
-    <div class="container">
-      <h2 class="section-title">Watch & Learn</h2>
-      
-      <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="financial">Financial Fraud</button>
-        <button class="filter-btn" data-filter="social">Social Media</button>
-        <button class="filter-btn" data-filter="identity">Identity Theft</button>
-        <button class="filter-btn" data-filter="phishing">Phishing</button>
-        <button class="filter-btn" data-filter="ransomware">Ransomware</button>
+    <!-- Watch & Learn Videos Section -->
+    <section id="videos" class="section" role="region" aria-label="Educational videos">
+      <div class="container">
+        <h2 class="section-title">Watch & Learn</h2>
+        
+        <!-- Filter Buttons with Accessibility -->
+        <div class="filter-bar" role="toolbar" aria-label="Video category filters">
+          <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter-btn" data-filter="financial" aria-pressed="false">Financial Fraud</button>
+          <button class="filter-btn" data-filter="social" aria-pressed="false">Social Media</button>
+          <button class="filter-btn" data-filter="identity" aria-pressed="false">Identity Theft</button>
+          <button class="filter-btn" data-filter="phishing" aria-pressed="false">Phishing</button>
+          <button class="filter-btn" data-filter="ransomware" aria-pressed="false">Ransomware</button>
+        </div>
+
+        <!-- Video Grid with Lazy Loading Support -->
+        <div class="video-grid" id="video-grid" role="region" aria-label="Video content grid">
+          <!-- Videos will be loaded dynamically with lazy loading -->
+        </div>
       </div>
+    </section>
 
-      <div class="video-grid" id="video-grid"></div>
-    </div>
-  </section>
-
-  <section id="stories" class="section alt-bg">
-    <div class="container">
-      <h2 class="section-title">India Cyber Stories</h2>
-      <p class="section-subtitle">Real Incidents, Real People</p>
-      <div class="stories-layout">
-        <div class="stories-feed" id="stories-feed"></div>
+    <!-- India Cyber Stories Section -->
+    <section id="stories" class="section alt-bg" role="region" aria-label="Cyber crime stories from India">
+      <div class="container">
+        <h2 class="section-title">India Cyber Stories</h2>
+        <p class="section-subtitle">Real Incidents, Real People</p>
+        <div class="stories-layout">
+          <div class="stories-feed" id="stories-feed" role="feed" aria-label="Stories feed">
+            <!-- Stories will be loaded dynamically -->
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="tips-carousel-section">
-    <div class="tips-track" id="tips-track"></div>
-  </section>
+    <!-- Tips Carousel Section -->
+    <section class="tips-carousel-section" role="region" aria-label="Cyber safety tips carousel">
+      <div class="tips-track" id="tips-track" role="region" aria-label="Scrollable tips">
+        <!-- Tips will be loaded dynamically -->
+      </div>
+    </section>
 
-  <footer id="report" class="footer">
+  </main>
+
+  <!-- Footer with Contact and Resources -->
+  <footer id="report" class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-grid">
+        
+        <!-- Branding Section -->
         <div class="footer-col branding">
           <h3>Cyber<span class="accent">Suraksha</span></h3>
           <p>Empowering digital citizens with knowledge to protect their online identities.</p>
         </div>
+        
+        <!-- Emergency Contact Section -->
         <div class="footer-col red-alert">
           <h3>🚨 Emergency?</h3>
           <p>National Cyber Crime Reporting Portal</p>
-          <a href="tel:1930" class="btn-call">📞 Call 1930</a>
+          <a href="tel:1930" class="btn-call" aria-label="Call India's cyber crime hotline 1930">📞 Call 1930</a>
           <br>
-          <a href="https://cybercrime.gov.in" target="_blank" class="report-link">Visit cybercrime.gov.in →</a>
+          <a href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer" class="report-link" aria-label="Visit official cybercrime reporting portal">Visit cybercrime.gov.in →</a>
         </div>
+        
+        <!-- Resources Links Section -->
         <div class="footer-col resources">
           <h3>Helpful Links</h3>
           <ul>
-            <li><a href="https://www.cert-in.org.in/" target="_blank">CERT-In</a></li>
-            <li><a href="#">Cyber Safety Checklist (PDF) EN</a></li>
-            <li><a href="#">Cyber Safety Checklist (PDF) HI</a></li>
+            <li><a href="https://www.cert-in.org.in/" target="_blank" rel="noopener noreferrer" aria-label="Visit CERT-In official website">CERT-In</a></li>
+            <li><a href="assets/documents/cyber-safety-checklist-en.pdf" download aria-label="Download Cyber Safety Checklist in English">Cyber Safety Checklist (PDF) EN</a></li>
+            <li><a href="assets/documents/cyber-safety-checklist-hi.pdf" download aria-label="Download Cyber Safety Checklist in Hindi">Cyber Safety Checklist (PDF) HI</a></li>
           </ul>
         </div>
       </div>
+      
+      <!-- Footer Bottom -->
       <div class="footer-bottom">
         <p>Made with ❤️ for Digital India | Hack The Scammers, Protect Yourself.</p>
       </div>
     </div>
   </footer>
 
+  <!-- Main JavaScript File -->
   <script src="script.js"></script>
 </body>
 </html>
