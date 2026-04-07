@@ -1,80 +1,360 @@
-.news-feed-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 10px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+<!-- ============================================================
+  CYBERSURAKSHA - NEAREST CYBER POLICE STATION FINDER
+  Add this section in your index.html (after #help section works well)
+  Uses browser geolocation + Google Maps embed
+  NO API KEY NEEDED for the distance calculations
+============================================================ -->
 
-.news-feed-card h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
+<section id="cyber-stations" class="station-section">
+  <div class="container">
+    <h2>🚔 Nearest Cyber Police Station</h2>
+    <p class="station-subtitle">Find the closest cyber crime help center near you</p>
 
-.news-filter {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-}
+    <div class="station-card">
+      <div class="station-left">
+        <button class="locate-btn" id="locate-btn" onclick="findNearestStation()">
+          📍 Use My Location
+        </button>
+        <p class="locate-note">OR search by city / district:</p>
+        <div class="station-search-row">
+          <input type="text" id="city-input" placeholder="e.g. Pune, Mumbai, Nagpur..." class="city-input" onkeydown="if(event.key==='Enter') searchByCity()" />
+          <button class="search-city-btn" onclick="searchByCity()">Search</button>
+        </div>
 
-.news-tags {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 10px 0;
-}
+        <div id="station-result" class="station-result" style="display:none"></div>
 
-.news-tag {
-    background-color: #007bff;
-    color: white;
-    border-radius: 3px;
-    padding: 5px 10px;
-    margin: 5px;
-    font-size: 0.9em;
-}
+        <!-- Emergency always visible -->
+        <div class="emergency-bar">
+          <div class="emergency-item">
+            <span class="e-icon">📞</span>
+            <div>
+              <div class="e-label">Cyber Crime Helpline</div>
+              <a href="tel:1930" class="e-number">1930</a>
+            </div>
+          </div>
+          <div class="emergency-item">
+            <span class="e-icon">🌐</span>
+            <div>
+              <div class="e-label">Online Complaint</div>
+              <a href="https://cybercrime.gov.in" target="_blank" class="e-number">cybercrime.gov.in</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-.police-station-card {
-    background-color: #f8f9fa;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 10px 0;
-}
+      <div class="station-right">
+        <div id="map-container">
+          <div class="map-placeholder">
+            <div class="map-icon">🗺️</div>
+            <p>Use location or search a city to see the nearest cyber police station on the map</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-.police-locator-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px 0;
-}
+    <!-- State-wise Cyber Cell Directory -->
+    <div class="state-directory">
+      <h3>📋 State Cyber Cell Directory</h3>
+      <div class="state-grid" id="state-grid"></div>
+    </div>
+  </div>
+</section>
 
-.police-map-container {
-    height: 400px;
-    width: 100%;
-    border: 1px solid #ddd;
-    margin: 10px 0;
+<style>
+.station-section {
+  padding: 60px 0;
+  background: #060d1a;
 }
-
+.station-section h2 {
+  font-size: 1.8rem;
+  color: #00d4ff;
+  margin-bottom: 6px;
+}
+.station-subtitle {
+  color: #aaa;
+  margin-bottom: 28px;
+}
+.station-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  background: #0d1526;
+  border: 1px solid #1a2744;
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 40px;
+}
 @media (max-width: 768px) {
-    .news-feed-card {
-        padding: 10px;
-    }
+  .station-card { grid-template-columns: 1fr; }
+}
+.locate-btn {
+  width: 100%;
+  padding: 14px;
+  background: #00d4ff;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 16px;
+}
+.locate-btn:hover { background: #00b8d4; }
+.locate-btn:disabled { background: #334; color: #888; cursor: not-allowed; }
+.locate-note { color: #667; font-size: 0.85rem; margin-bottom: 10px; }
+.station-search-row { display: flex; gap: 8px; margin-bottom: 20px; }
+.city-input {
+  flex: 1;
+  padding: 10px 14px;
+  background: #111827;
+  border: 1px solid #1a2744;
+  border-radius: 8px;
+  color: #e0e6f0;
+  font-size: 0.9rem;
+}
+.city-input:focus { outline: none; border-color: #00d4ff55; }
+.search-city-btn {
+  padding: 10px 18px;
+  background: transparent;
+  border: 1px solid #00d4ff;
+  color: #00d4ff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.search-city-btn:hover { background: #00d4ff22; }
+.station-result {
+  background: #111827;
+  border: 1px solid #1a3a5c;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+.station-name { font-size: 1rem; font-weight: 700; color: #00d4ff; margin-bottom: 6px; }
+.station-addr { font-size: 0.85rem; color: #aaa; margin-bottom: 8px; line-height: 1.5; }
+.station-phone a { color: #4ade80; font-weight: 600; text-decoration: none; }
+.station-directions {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 7px 14px;
+  background: #00d4ff;
+  color: #000;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.emergency-bar {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-top: 1px solid #1a2744;
+  padding-top: 16px;
+}
+.emergency-item { display: flex; align-items: center; gap: 10px; }
+.e-icon { font-size: 1.4rem; }
+.e-label { font-size: 0.7rem; color: #667; text-transform: uppercase; letter-spacing: 1px; }
+.e-number { color: #00d4ff; font-weight: 700; font-size: 0.95rem; text-decoration: none; }
+.e-number:hover { text-decoration: underline; }
+.map-placeholder {
+  width: 100%;
+  height: 280px;
+  background: #111827;
+  border-radius: 10px;
+  border: 1px dashed #1a2744;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #556;
+  text-align: center;
+  padding: 20px;
+}
+.map-icon { font-size: 3rem; margin-bottom: 10px; }
+#map-container iframe {
+  width: 100%;
+  height: 280px;
+  border-radius: 10px;
+  border: none;
+}
+/* State directory */
+.state-directory h3 { color: #e0e6f0; margin-bottom: 20px; }
+.state-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+.state-card {
+  background: #0d1526;
+  border: 1px solid #1a2744;
+  border-radius: 10px;
+  padding: 14px 16px;
+  transition: border-color 0.2s;
+}
+.state-card:hover { border-color: #00d4ff33; }
+.state-name { font-weight: 700; color: #00d4ff; margin-bottom: 6px; font-size: 0.9rem; }
+.state-contact { font-size: 0.8rem; color: #aaa; line-height: 1.6; }
+.state-contact a { color: #4ade80; text-decoration: none; }
+</style>
 
-    .news-filter {
-        flex-direction: column;
-    }
+<script>
+// ---- CYBER POLICE STATION DATA ----
+// Major city cyber cells across India
 
-    .police-map-container {
-        height: 300px;
-    }
+const CYBER_STATIONS = [
+  // Maharashtra
+  { name: "Pune Cyber Crime Police Station", city: "Pune", state: "Maharashtra", address: "Commissionerate Headquarters, Shivajinagar, Pune - 411005", phone: "020-26122880", lat: 18.5204, lng: 73.8567, url: "https://punepolice.gov.in/en" },
+  { name: "Mumbai Cyber Crime Cell", city: "Mumbai", state: "Maharashtra", address: "Crime Branch, Crawford Market, Mumbai - 400001", phone: "022-24938888", lat: 18.9387, lng: 72.8353, url: "https://mumbaipolice.gov.in" },
+  { name: "Nagpur Cyber Crime Cell", city: "Nagpur", state: "Maharashtra", address: "CP Office, Civil Lines, Nagpur - 440001", phone: "0712-2565151", lat: 21.1458, lng: 79.0882, url: "https://nagpurpolice.gov.in" },
+  { name: "Aurangabad Cyber Crime Cell", city: "Aurangabad", state: "Maharashtra", address: "Police Commissionerate, Aurangabad", phone: "0240-2333044", lat: 19.8762, lng: 75.3433, url: "https://mahapolice.gov.in" },
+  { name: "Nashik Cyber Crime Cell", city: "Nashik", state: "Maharashtra", address: "SP Office, Nashik - 422001", phone: "0253-2570808", lat: 19.9975, lng: 73.7898, url: "https://mahapolice.gov.in" },
+  // Delhi
+  { name: "Delhi Cyber Crime Unit", city: "Delhi", state: "Delhi", address: "Cyber Police Station, Mandir Marg, New Delhi - 110001", phone: "011-26702072", lat: 28.6273, lng: 77.2290, url: "https://delhipolice.gov.in" },
+  // Karnataka
+  { name: "Bengaluru Cyber Crime PS", city: "Bengaluru", state: "Karnataka", address: "CEN PS, Carlton House, Palace Road, Bengaluru - 560001", phone: "080-22942345", lat: 12.9716, lng: 77.5946, url: "https://ksp.gov.in" },
+  // Tamil Nadu
+  { name: "Chennai Cyber Crime Cell", city: "Chennai", state: "Tamil Nadu", address: "Commissioner Office, Vepery, Chennai - 600007", phone: "044-28447373", lat: 13.0827, lng: 80.2707, url: "https://www.tnpolice.gov.in" },
+  // Telangana
+  { name: "Hyderabad Cyber Crime PS", city: "Hyderabad", state: "Telangana", address: "Cyber Crime PS, Banjara Hills, Hyderabad - 500034", phone: "040-27852024", lat: 17.4065, lng: 78.4772, url: "https://tspolice.gov.in" },
+  // Rajasthan
+  { name: "Jaipur Cyber Crime Cell", city: "Jaipur", state: "Rajasthan", address: "Police Commissionerate, Jaipur - 302001", phone: "0141-2740006", lat: 26.9124, lng: 75.7873, url: "https://police.rajasthan.gov.in" },
+  // Gujarat
+  { name: "Ahmedabad Cyber Crime Cell", city: "Ahmedabad", state: "Gujarat", address: "Crime Branch, Shahibaug, Ahmedabad - 380004", phone: "079-25630100", lat: 23.0225, lng: 72.5714, url: "https://ahmedabadpolice.gov.in" },
+  // West Bengal
+  { name: "Kolkata Cyber Crime PS", city: "Kolkata", state: "West Bengal", address: "Lalbazar HQ, Kolkata - 700001", phone: "033-22143004", lat: 22.5726, lng: 88.3639, url: "https://kolkatapolice.gov.in" },
+  // UP
+  { name: "Lucknow Cyber Crime Cell", city: "Lucknow", state: "Uttar Pradesh", address: "UP Cyber Crime PS, Gomtinagar, Lucknow", phone: "0522-2205625", lat: 26.8467, lng: 80.9462, url: "https://uppolice.gov.in" },
+  // Punjab
+  { name: "Chandigarh Cyber Crime Cell", city: "Chandigarh", state: "Punjab/Haryana", address: "Cyber Crime Cell, Sector 9, Chandigarh", phone: "0172-2749100", lat: 30.7333, lng: 76.7794, url: "https://chandigarhpolice.gov.in" },
+  // Kerala
+  { name: "Kochi Cyber Dome", city: "Kochi", state: "Kerala", address: "Cyber Dome, Kalamassery, Kochi - 683104", phone: "0484-2722700", lat: 10.0889, lng: 76.3280, url: "https://keralapolice.gov.in" },
+];
+
+// State-wise entries for directory
+const STATE_CELLS = [
+  { state: "Maharashtra", phone: "1930", url: "https://mahapolice.gov.in", detail: "cybercell@mahapolice.gov.in" },
+  { state: "Delhi", phone: "011-26702072", url: "https://delhipolice.gov.in", detail: "cybercrime@delhipolice.gov.in" },
+  { state: "Karnataka", phone: "080-22942345", url: "https://ksp.gov.in", detail: "cybercrime@ksp.gov.in" },
+  { state: "Tamil Nadu", phone: "044-28447373", url: "https://tnpolice.gov.in", detail: "cybercrime@tnpolice.gov.in" },
+  { state: "Telangana", phone: "040-27852024", url: "https://tspolice.gov.in", detail: "cybercrime@tspolice.gov.in" },
+  { state: "Gujarat", phone: "079-25630100", url: "https://gujaratpolice.gov.in", detail: "cybercrime@gujaratpolice.gov.in" },
+  { state: "Rajasthan", phone: "0141-2740006", url: "https://police.rajasthan.gov.in", detail: "cybercrime@rajpolice.gov.in" },
+  { state: "West Bengal", phone: "033-22143004", url: "https://wbpolice.gov.in", detail: "cybercrime@wbpolice.gov.in" },
+  { state: "Uttar Pradesh", phone: "0522-2205625", url: "https://uppolice.gov.in", detail: "cybercrime@uppolice.gov.in" },
+  { state: "Kerala", phone: "0484-2722700", url: "https://keralapolice.gov.in", detail: "cybercrime@keralapolice.gov.in" },
+  { state: "Punjab", phone: "0172-2749100", url: "https://punjabpolice.gov.in", detail: "cybercrime@punjabpolice.gov.in" },
+  { state: "Madhya Pradesh", phone: "0755-2443573", url: "https://mppolice.gov.in", detail: "cybercrime@mppolice.gov.in" },
+];
+
+function haversineDistance(lat1, lng1, lat2, lng2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLng/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 }
 
-@media (max-width: 576px) {
-    .news-feed-card {
-        font-size: 0.9em;
-    }
+function findNearestStation() {
+  const btn = document.getElementById('locate-btn');
+  btn.disabled = true;
+  btn.textContent = '📍 Locating...';
 
-    .news-tag {
-        font-size: 0.8em;
+  if (!navigator.geolocation) {
+    alert('Geolocation is not supported by your browser. Please search by city name.');
+    btn.disabled = false;
+    btn.textContent = '📍 Use My Location';
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const { latitude, longitude } = pos.coords;
+      const nearest = CYBER_STATIONS
+        .map(s => ({ ...s, dist: haversineDistance(latitude, longitude, s.lat, s.lng) }))
+        .sort((a, b) => a.dist - b.dist)[0];
+      showStation(nearest, latitude, longitude);
+      btn.disabled = false;
+      btn.textContent = '📍 Use My Location';
+    },
+    err => {
+      alert('Could not get your location. Please allow location access or search by city.');
+      btn.disabled = false;
+      btn.textContent = '📍 Use My Location';
     }
+  );
 }
+
+function searchByCity() {
+  const input = document.getElementById('city-input').value.trim().toLowerCase();
+  if (!input) return;
+  const match = CYBER_STATIONS.find(s =>
+    s.city.toLowerCase().includes(input) || s.state.toLowerCase().includes(input)
+  );
+  if (match) {
+    showStation(match, null, null);
+  } else {
+    const result = document.getElementById('station-result');
+    result.style.display = 'block';
+    result.innerHTML = `
+      <div style="color:#ff6b6b">
+        ⚠️ No exact match found for "<strong>${input}</strong>". 
+        <br>Please call <a href="tel:1930" style="color:#00d4ff">1930</a> or visit 
+        <a href="https://cybercrime.gov.in" target="_blank" style="color:#00d4ff">cybercrime.gov.in</a>
+      </div>
+    `;
+    document.getElementById('map-container').innerHTML = `<div class="map-placeholder"><div class="map-icon">🔍</div><p>Try another city or use your location</p></div>`;
+  }
+}
+
+function showStation(station, userLat, userLng) {
+  const result = document.getElementById('station-result');
+  result.style.display = 'block';
+
+  const distStr = (userLat && userLng)
+    ? `<span style="color:#4ade80;font-size:0.8rem">📍 ~${Math.round(station.dist)} km away</span>`
+    : `<span style="color:#aaa;font-size:0.8rem">📍 ${station.city}, ${station.state}</span>`;
+
+  result.innerHTML = `
+    <div class="station-name">🚔 ${station.name}</div>
+    ${distStr}
+    <div class="station-addr">📍 ${station.address}</div>
+    <div class="station-phone">📞 <a href="tel:${station.phone}">${station.phone}</a></div>
+    <a class="station-directions" 
+       href="https://www.google.com/maps/search/${encodeURIComponent(station.name + ' ' + station.city)}" 
+       target="_blank">
+      🗺️ Get Directions
+    </a>
+  `;
+
+  // Show map embed
+  const mapContainer = document.getElementById('map-container');
+  const query = encodeURIComponent(station.name + ', ' + station.address);
+  mapContainer.innerHTML = `
+    <iframe 
+      src="https://maps.google.com/maps?q=${query}&output=embed&z=14"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  `;
+}
+
+// Render state directory
+function renderStateDirectory() {
+  const grid = document.getElementById('state-grid');
+  if (!grid) return;
+  grid.innerHTML = STATE_CELLS.map(s => `
+    <div class="state-card">
+      <div class="state-name">${s.state}</div>
+      <div class="state-contact">
+        📞 <a href="tel:${s.phone}">${s.phone}</a><br>
+        🌐 <a href="${s.url}" target="_blank">${s.url.replace('https://', '')}</a><br>
+        ✉️ ${s.detail}
+      </div>
+    </div>
+  `).join('');
+}
+
+document.addEventListener('DOMContentLoaded', renderStateDirectory);
+</script>
