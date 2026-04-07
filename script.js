@@ -1,233 +1,238 @@
-// ============================================================
-// CYBERSURAKSHA - QUIZ FIX
-// Replace your existing quiz JS with this complete block
-// ============================================================
-
 const quizQuestions = [
   {
-    question: "आपको एक अनजान नंबर से call आती है और वो आपसे OTP मांगते हैं। आप क्या करेंगे?",
-    english: "An unknown caller asks for your OTP. What do you do?",
+    question: "What is the safest action when receiving an unexpected email attachment?",
     options: [
-      "OTP दे दो, शायद जरूरी हो",
-      "Call काट दो और नंबर block करो",
-      "OTP का सिर्फ आधा बताओ",
-      "बाद में call back करो"
+      "Open it quickly to verify content",
+      "Scan it and confirm sender authenticity first",
+      "Forward it to all team members",
+      "Reply with your password for verification",
     ],
-    correct: 1,
-    explanation: "कोई भी legitimate company या bank कभी OTP नहीं मांगती। तुरंत call काटें और नंबर block करें।"
+    answer: 1,
   },
   {
-    question: "आपके WhatsApp पर एक link आई है जिसमें लिखा है 'Free Jio Recharge - Click Now!'",
-    english: "A WhatsApp message says 'Free Jio Recharge - Click Now!'",
+    question: "Which password practice is most secure?",
     options: [
-      "Link खोलो, free recharge मिलेगा",
-      "दोस्तों को forward करो",
-      "Link मत खोलो, यह phishing है",
-      "Number save करके बाद में खोलो"
+      "Using the same password for all accounts",
+      "Using your birth date with your name",
+      "Using unique, long passwords with a manager",
+      "Writing passwords in public notes",
     ],
-    correct: 2,
-    explanation: "यह एक classic phishing scam है। Free offers के नाम पर आपकी personal info चुराई जाती है। ऐसे links कभी मत खोलो।"
+    answer: 2,
   },
   {
-    question: "Instagram पर एक verified जैसा account DM करता है: 'आपने lucky draw जीता! Details भेजो।'",
-    english: "A 'verified-looking' Instagram account DMs: 'You won a lucky draw! Send details.'",
+    question: "What does MFA (multi-factor authentication) provide?",
     options: [
-      "Details भेज दो",
-      "Account report करो और ignore करो",
-      "थोड़ी details share करके देखो",
-      "Account follow करो"
+      "Faster internet speed",
+      "An extra security layer beyond password",
+      "Automatic antivirus removal",
+      "A guarantee against all cyber attacks",
     ],
-    correct: 1,
-    explanation: "Fake verified accounts एक common scam है। Instagram कभी भी DM से lucky draw notify नहीं करता। Report और ignore करें।"
+    answer: 1,
   },
   {
-    question: "आपके phone पर एक SMS आई: 'Your SBI account will be blocked. Update KYC: [link]'",
-    english: "SMS: 'Your SBI account will be blocked. Update KYC at [link]'",
+    question: "If you suspect ransomware activity, what should you do first?",
     options: [
-      "Link पर click करके KYC update करो",
-      "SMS delete करो और bank को directly call करो",
-      "Link share करो family के साथ",
-      "Wait करो जब तक account block न हो"
+      "Ignore and continue work",
+      "Disconnect from network and report immediately",
+      "Pay the ransom instantly",
+      "Delete all files manually",
     ],
-    correct: 1,
-    explanation: "Banks कभी SMS में links नहीं भेजते KYC के लिए। यह vishing/smishing attack है। सीधे bank branch जाएं।"
+    answer: 1,
   },
-  {
-    question: "एक website पर shopping करते वक्त URL में क्या देखना जरूरी है?",
-    english: "What should you check in a website URL before shopping online?",
-    options: [
-      "URL लंबा हो",
-      "HTTPS और lock icon हो",
-      "Website colorful हो",
-      "बहुत सारे products हों"
-    ],
-    correct: 1,
-    explanation: "HTTPS और lock icon मतलब connection secure है। HTTP वाली sites पर कभी payment मत करो।"
-  },
-  {
-    question: "Cyber fraud होने पर सबसे पहले क्या करना चाहिए?",
-    english: "What is the FIRST thing to do if you are a victim of cyber fraud?",
-    options: [
-      "Social media पर post करो",
-      "1930 helpline call करो या cybercrime.gov.in पर report करो",
-      "खुद से hack करने की कोशिश करो",
-      "कुछ मत करो, पैसे वापस आ जाएंगे"
-    ],
-    correct: 1,
-    explanation: "1930 National Cyber Crime Helpline है। जितनी जल्दी report करोगे, उतना chance है पैसे वापस मिलने का।"
-  },
-  {
-    question: "Strong password कैसा होना चाहिए?",
-    english: "Which is the strongest password?",
-    options: [
-      "password123",
-      "aapkanaam1990",
-      "Gy#7!mPq@2kL",
-      "12345678"
-    ],
-    correct: 2,
-    explanation: "Strong password में uppercase, lowercase, numbers, और special characters होने चाहिए। नाम या जन्म साल use मत करो।"
-  },
-  {
-    question: "Public WiFi (जैसे railway station का) पर क्या नहीं करना चाहिए?",
-    english: "What should you NEVER do on public WiFi (like at a railway station)?",
-    options: [
-      "News पढ़ना",
-      "Net banking या UPI use करना",
-      "YouTube देखना",
-      "Weather check करना"
-    ],
-    correct: 1,
-    explanation: "Public WiFi unsecured होती है। Hackers आपकी banking details चुरा सकते हैं। Net banking के लिए हमेशा mobile data use करो।"
-  },
-  {
-    question: "Two-Factor Authentication (2FA) क्या करता है?",
-    english: "What does Two-Factor Authentication (2FA) do?",
-    options: [
-      "Password double करता है",
-      "Login के लिए दूसरी verification layer add करता है",
-      "Internet speed बढ़ाता है",
-      "Virus हटाता है"
-    ],
-    correct: 1,
-    explanation: "2FA मतलब password के साथ OTP या authenticator app भी चाहिए। यह account हacking से बचाता है।"
-  },
-  {
-    question: "आपके दोस्त का WhatsApp account hack हो गया और वो पैसे मांग रहा है। क्या करोगे?",
-    english: "Your friend's WhatsApp is hacked and 'they' are asking for money. What do you do?",
-    options: [
-      "तुरंत पैसे भेज दो",
-      "पहले directly call करके confirm करो",
-      "बिना सोचे UPI transfer करो",
-      "Screenshot लेकर forward करो"
-    ],
-    correct: 1,
-    explanation: "Hacked accounts से paise maangna common scam है। हमेशा directly call करके confirm करो। पैसे कभी तुरंत मत भेजो।"
-  }
 ];
 
-// ============================================================
-// QUIZ ENGINE - Paste this where your quiz JS goes
-// ============================================================
-
-let currentQuestion = 0;
-let score = 0;
-let answered = false;
+const API_BASE = "http://localhost:4000/api";
+const quizContainer = document.getElementById("quiz-container");
+const chatBox = document.getElementById("chat-box");
+const chatInput = document.getElementById("chat-input");
+const sendBtn = document.getElementById("send-btn");
+const locateBtn = document.getElementById("locate-btn");
+const locationResult = document.getElementById("location-result");
+const stationsList = document.getElementById("stations-list");
+const refreshNewsBtn = document.getElementById("refresh-news-btn");
+const newsList = document.getElementById("news-list");
+const newsStatus = document.getElementById("news-status");
 
 function initQuiz() {
-  currentQuestion = 0;
-  score = 0;
-  answered = false;
-  renderQuestion();
-}
+  let score = 0;
+  quizQuestions.forEach((q, index) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "quiz-question";
+    wrapper.innerHTML = `<strong>Q${index + 1}. ${q.question}</strong>`;
 
-function renderQuestion() {
-  const q = quizQuestions[currentQuestion];
-  const container = document.getElementById('quiz-container');
-  if (!container) return;
+    const options = document.createElement("div");
+    options.className = "quiz-options";
 
-  container.innerHTML = `
-    <div class="quiz-header">
-      <div class="quiz-progress-bar">
-        <div class="quiz-progress-fill" style="width: ${(currentQuestion / quizQuestions.length) * 100}%"></div>
-      </div>
-      <p class="quiz-counter">Question ${currentQuestion + 1} of ${quizQuestions.length} &nbsp;|&nbsp; Score: ${score}</p>
-    </div>
+    q.options.forEach((option, optIndex) => {
+      const item = document.createElement("button");
+      item.className = "quiz-option";
+      item.textContent = option;
+      item.addEventListener("click", () => {
+        if (wrapper.dataset.answered === "true") {
+          return;
+        }
 
-    <div class="quiz-question-card">
-      <p class="quiz-hindi">${q.question}</p>
-      <p class="quiz-english">${q.english}</p>
-      <div class="quiz-options" id="quiz-options">
-        ${q.options.map((opt, i) => `
-          <button class="quiz-option" onclick="selectAnswer(${i})" id="opt-${i}">
-            <span class="opt-label">${String.fromCharCode(65 + i)}</span>
-            ${opt}
-          </button>
-        `).join('')}
-      </div>
-      <div class="quiz-explanation" id="quiz-explanation" style="display:none"></div>
-      <button class="quiz-next-btn" id="quiz-next-btn" onclick="nextQuestion()" style="display:none">
-        ${currentQuestion < quizQuestions.length - 1 ? 'Agla Sawaal →' : 'Result Dekho 🏆'}
-      </button>
-    </div>
-  `;
-  answered = false;
-}
+        wrapper.dataset.answered = "true";
+        if (optIndex === q.answer) {
+          item.classList.add("correct");
+          score += 1;
+        } else {
+          item.classList.add("wrong");
+          const correct = options.children[q.answer];
+          correct.classList.add("correct");
+        }
 
-function selectAnswer(selectedIdx) {
-  if (answered) return;
-  answered = true;
+        scoreBoard.textContent = `Score: ${score}/${quizQuestions.length}`;
+      });
+      options.appendChild(item);
+    });
 
-  const q = quizQuestions[currentQuestion];
-  const correct = q.correct;
-
-  document.querySelectorAll('.quiz-option').forEach((btn, i) => {
-    btn.disabled = true;
-    if (i === correct) btn.classList.add('quiz-correct');
-    else if (i === selectedIdx && selectedIdx !== correct) btn.classList.add('quiz-wrong');
+    wrapper.appendChild(options);
+    quizContainer.appendChild(wrapper);
   });
 
-  if (selectedIdx === correct) score++;
-
-  const expDiv = document.getElementById('quiz-explanation');
-  expDiv.style.display = 'block';
-  expDiv.innerHTML = `
-    <span class="exp-icon">${selectedIdx === correct ? '✅' : '❌'}</span>
-    <span>${q.explanation}</span>
-  `;
-
-  document.getElementById('quiz-next-btn').style.display = 'inline-block';
+  const scoreBoard = document.createElement("p");
+  scoreBoard.className = "result";
+  scoreBoard.textContent = `Score: 0/${quizQuestions.length}`;
+  quizContainer.appendChild(scoreBoard);
 }
 
-function nextQuestion() {
-  currentQuestion++;
-  if (currentQuestion >= quizQuestions.length) {
-    showResult();
-  } else {
-    renderQuestion();
+function addMessage(role, text) {
+  const msg = document.createElement("div");
+  msg.className = `chat-msg ${role}`;
+  msg.innerHTML = `<strong>${role === "user" ? "You" : "AI"}:</strong> ${text}`;
+  chatBox.appendChild(msg);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+async function askAssistant() {
+  const question = chatInput.value.trim();
+
+  if (!question) {
+    return;
+  }
+
+  addMessage("user", question);
+  chatInput.value = "";
+  addMessage("assistant", "Analyzing your cyber issue...");
+
+  try {
+    const res = await fetch(`${API_BASE}/assistant`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        question,
+      }),
+    });
+
+    if (!res.ok) {
+      throw new Error("AI request failed. Please try again.");
+    }
+
+    const data = await res.json();
+    const answer = data?.answer || "I could not generate a response right now.";
+
+    chatBox.removeChild(chatBox.lastElementChild);
+    addMessage("assistant", answer);
+  } catch (error) {
+    chatBox.removeChild(chatBox.lastElementChild);
+    addMessage("assistant", error.message);
   }
 }
 
-function showResult() {
-  const container = document.getElementById('quiz-container');
-  const percent = Math.round((score / quizQuestions.length) * 100);
-  let badge, msg;
+function setupGeoLookup() {
+  locateBtn.addEventListener("click", () => {
+    if (!navigator.geolocation) {
+      locationResult.textContent =
+        "Geolocation is not available in your browser.";
+      return;
+    }
 
-  if (percent >= 90) { badge = '🛡️ Cyber Guardian'; msg = 'Waah! Aap ek sachche Digital Warrior hain!'; }
-  else if (percent >= 70) { badge = '🔐 Cyber Aware'; msg = 'Acha score! Thodi aur practice karo.'; }
-  else if (percent >= 50) { badge = '⚠️ Learning Phase'; msg = 'Theek hai, lekin aur seekhne ki zaroorat hai.'; }
-  else { badge = '🚨 At Risk'; msg = 'Kripya hamare videos aur stories padho - aap vulnerable hain!'; }
+    locationResult.textContent = "Fetching your location...";
+    navigator.geolocation.getCurrentPosition(async (position) => {
+        const { latitude, longitude } = position.coords;
+        const mapsUrl = `https://www.google.com/maps/search/cyber+police+station/@${latitude},${longitude},13z`;
+        locationResult.innerHTML =
+          'Location detected. <a target="_blank" rel="noreferrer">Open nearest cyber police stations in Google Maps</a>';
+        locationResult.querySelector("a").href = mapsUrl;
 
-  container.innerHTML = `
-    <div class="quiz-result-card">
-      <div class="quiz-result-badge">${badge}</div>
-      <div class="quiz-result-score">${score}/${quizQuestions.length}</div>
-      <div class="quiz-result-percent">${percent}%</div>
-      <p class="quiz-result-msg">${msg}</p>
-      <button class="quiz-retry-btn" onclick="initQuiz()">Dobara Khelo 🔄</button>
-    </div>
-  `;
+        stationsList.innerHTML = "";
+        try {
+          const response = await fetch(
+            `${API_BASE}/stations?lat=${latitude}&lon=${longitude}`
+          );
+          if (!response.ok) {
+            throw new Error("Could not load nearby stations");
+          }
+
+          const data = await response.json();
+          if (!data.stations.length) {
+            stationsList.innerHTML =
+              '<div class="news-item">No nearby police records found from map data.</div>';
+            return;
+          }
+
+          data.stations.forEach((station, idx) => {
+            const card = document.createElement("div");
+            card.className = "news-item";
+            card.innerHTML = `
+              <strong>${idx + 1}. ${station.name}</strong>
+              <div class="news-source">${station.distanceKm} km away</div>
+              <a href="${station.mapUrl}" target="_blank" rel="noreferrer">Open in maps</a>
+            `;
+            stationsList.appendChild(card);
+          });
+        } catch (error) {
+          stationsList.innerHTML = `<div class="news-item">${error.message}</div>`;
+        }
+      }, () => {
+        locationResult.textContent =
+          "Unable to fetch location. Please allow location access and retry.";
+      });
+  });
 }
 
-// Auto-initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', initQuiz);
+async function loadNews() {
+  newsStatus.textContent = "Loading cybersecurity headlines...";
+  newsList.innerHTML = "";
+
+  try {
+    const res = await fetch(`${API_BASE}/news`);
+    if (!res.ok) {
+      throw new Error("Failed to load latest cybersecurity news");
+    }
+    const data = await res.json();
+    (data.articles || []).forEach((article) => {
+        const card = document.createElement("div");
+        card.className = "news-item";
+        card.innerHTML = `
+          <a href="${article.link}" target="_blank" rel="noreferrer">${article.title}</a>
+          <div class="news-source">${article.source} - ${new Date(article.date).toLocaleString()}</div>
+        `;
+        newsList.appendChild(card);
+      });
+
+    if (!newsList.children.length) {
+      newsStatus.textContent =
+        "No cybersecurity-specific headlines found right now. Try refreshing.";
+    } else {
+      newsStatus.textContent = "Latest headlines loaded.";
+    }
+  } catch (error) {
+    newsStatus.textContent = `News loading failed: ${error.message}`;
+  }
+}
+
+sendBtn.addEventListener("click", askAssistant);
+chatInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    askAssistant();
+  }
+});
+refreshNewsBtn.addEventListener("click", loadNews);
+
+initQuiz();
+setupGeoLookup();
+loadNews();
